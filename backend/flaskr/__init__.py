@@ -114,7 +114,7 @@ def create_app(test_config=None):
                 'deleted': id
             })
 
-        except:
+        except BaseException:
             # abort if problem deleting question
             abort(422)
 
@@ -162,8 +162,11 @@ def create_app(test_config=None):
 
             try:
                 # create and insert new question
-                question = Question(question=new_question, answer=new_answer,
-                                    difficulty=new_difficulty, category=new_category)
+                question = Question(
+                    question=new_question,
+                    answer=new_answer,
+                    difficulty=new_difficulty,
+                    category=new_category)
                 question.insert()
 
                 # get all questions and paginate
@@ -179,7 +182,7 @@ def create_app(test_config=None):
                     'total_questions': len(Question.query.all())
                 })
 
-            except:
+            except BaseException:
                 # abort unprocessable if exception
                 abort(422)
 

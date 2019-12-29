@@ -24,8 +24,7 @@ class TriviaTestCase(unittest.TestCase):
             'question': 'Which four states make up the 4 Corners region of the US?',
             'answer': 'Colorado, New Mexico, Arizona, Utah',
             'difficulty': 3,
-            'category': '3'
-        }
+            'category': '3'}
 
         # binds the app to the current context
         with self.app.app_context():
@@ -69,8 +68,11 @@ class TriviaTestCase(unittest.TestCase):
         """Tests question deletion success"""
 
         # create a new question to be deleted
-        question = Question(question=self.new_question['question'], answer=self.new_question['answer'],
-                            category=self.new_question['category'], difficulty=self.new_question['difficulty'])
+        question = Question(
+            question=self.new_question['question'],
+            answer=self.new_question['answer'],
+            category=self.new_question['category'],
+            difficulty=self.new_question['difficulty'])
         question.insert()
 
         # get the id of the new question
@@ -220,9 +222,15 @@ class TriviaTestCase(unittest.TestCase):
         """Tests playing quiz game success"""
 
         # send post request with category and previous questions
-        response = self.client().post('/quizzes',
-                                      json={'previous_questions': [20, 21],
-                                            'quiz_category': {'type': 'Science', 'id': '1'}})
+        response = self.client().post(
+            '/quizzes',
+            json={
+                'previous_questions': [
+                    20,
+                    21],
+                'quiz_category': {
+                    'type': 'Science',
+                    'id': '1'}})
 
         # load response data
         data = json.loads(response.data)
